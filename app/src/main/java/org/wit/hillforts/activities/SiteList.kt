@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_site_list.*
 import org.wit.hillforts.R
 import org.wit.hillforts.main.MainApp
@@ -30,5 +31,12 @@ class SiteList : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            //R.id.item_add -> startActivityForResult<HillfortActivity>(AppCompatActivity.RESULT_OK)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
