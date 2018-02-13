@@ -27,10 +27,9 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     override fun update(hillfort: HillfortModel) {
         var foundHillfort: HillfortModel? = hillforts.find { p -> p.id == hillfort.id }
         if (foundHillfort != null) {
-//            foundHillfort.title = hillfort.townland
-//            foundHillfort.description = hillfort.county
-//            foundHillfort.image = hillfort.dateVisited
-            info("image output"+hillfort.picture)
+            foundHillfort.townland = hillfort.townland
+            foundHillfort.county = hillfort.county
+            foundHillfort.dateVisited = hillfort.dateVisited
         }
     }
 
