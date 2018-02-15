@@ -35,18 +35,21 @@ class SiteList : AppCompatActivity(), HillfortListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<Hillfort>(AppCompatActivity.RESULT_OK)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-    override fun onSiteClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), AppCompatActivity.RESULT_OK)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         recyclerView.adapter.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_add -> startActivityForResult<Hillfort>(200)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSiteClick(hillfort: HillfortModel) {
+        startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), 200)
+    }
+
+
 }

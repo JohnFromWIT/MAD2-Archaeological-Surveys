@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.card_site.view.*
 import org.wit.hillforts.R
+import org.wit.hillforts.helpers.readImageFromPath
 import org.wit.hillforts.models.HillfortModel
 
 
@@ -35,6 +36,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
         fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.siteTownland.text = hillfort.townland
             itemView.siteDateVisited.text = hillfort.dateVisited
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.picture))
             itemView.setOnClickListener { listener.onSiteClick(hillfort) }
         }
     }
