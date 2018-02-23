@@ -8,6 +8,8 @@
     <string name="button_cancelSite">Cancel</string>
     <string name="button_saveSite">Save</string>
     <string name="button_addImage"> Add Image </string>
+    <string name="button_changeImage"> Change Image </string>
+    <string name="button_location">Set Location</string>
 
     <string name="hint_townland">Townland..</string>
     <string name="hint_dateVisited">Date Visited..</string>
@@ -92,4 +94,5 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

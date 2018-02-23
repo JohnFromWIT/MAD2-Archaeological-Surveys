@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillforts.R
 import org.wit.hillforts.helpers.readImage
@@ -12,6 +13,7 @@ import org.wit.hillforts.helpers.readImageFromPath
 import org.wit.hillforts.helpers.showImagePicker
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
+import org.wit.hillforts.models.Location
 
 class Hillfort : AppCompatActivity(), AnkoLogger {
 
@@ -19,6 +21,8 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
     var edit = false
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,11 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
+
+        siteLocation.setOnClickListener {
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
         if (intent.hasExtra("site_edit")) {
             //If site already exists populate with existing
             edit = true
@@ -39,7 +48,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras.getParcelable<HillfortModel>("site_edit")
             siteTownland.setText(hillfort.townland)
             siteDateVisited.setText(hillfort.dateVisited)
-            
+
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.picture))
             if (hillfort.picture != null) {
                 chooseImage.setText(R.string.change_siteImage)
@@ -50,7 +59,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
             hillfort.townland = siteTownland.text.toString()
             hillfort.dateVisited = siteDateVisited.text.toString()
-
+            hillfort.location = location
             if (edit) {
                 app.hillfortStore.update(hillfort.copy())
                 setResult(200)
@@ -74,6 +83,13 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     hillfort.picture = data.getData().toString()
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.button_changeImage)
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    hillfort.location = data.extras.getParcelable<Location>("location")
+                    location = hillfort.location
                 }
             }
         }
