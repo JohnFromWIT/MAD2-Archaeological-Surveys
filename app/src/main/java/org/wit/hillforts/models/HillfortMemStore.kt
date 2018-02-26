@@ -31,10 +31,12 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
             foundHillfort.county = hillfort.county
             foundHillfort.dateVisited = hillfort.dateVisited
             foundHillfort.picture = hillfort.picture
-            foundHillfort.location = hillfort.location
-
+            foundHillfort.lat = hillfort.lat
+            foundHillfort.lng = hillfort.lng
+            foundHillfort.zoom = hillfort.zoom
         }
-    }
+        }
+
 
     internal fun logAll() {
         hillforts.forEach { info("${it}") }

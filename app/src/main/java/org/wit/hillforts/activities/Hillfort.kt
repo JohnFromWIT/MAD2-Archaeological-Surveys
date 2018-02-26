@@ -38,6 +38,11 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
 
         siteLocation.setOnClickListener {
+            if (hillfort.zoom != 0f) {
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
+            }
             startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
@@ -59,7 +64,9 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
             hillfort.townland = siteTownland.text.toString()
             hillfort.dateVisited = siteDateVisited.text.toString()
-            hillfort.location = location
+            hillfort.lat =  location.lat
+            hillfort.lng = location.lng
+            hillfort.zoom = location.zoom
             if (edit) {
                 app.hillfortStore.update(hillfort.copy())
                 setResult(200)
@@ -88,8 +95,10 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
-                    hillfort.location = data.extras.getParcelable<Location>("location")
-                    location = hillfort.location
+                    val location = data.extras.getParcelable<Location>("location")
+                    hillfort.lat = location.lat
+                    hillfort.lng = location.lng
+                    hillfort.zoom = location.zoom
                 }
             }
         }
