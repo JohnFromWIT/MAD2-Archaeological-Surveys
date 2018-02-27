@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item_save"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/button_saveSite"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/item_cancel"
-        android:title="@string/menu_cancelSite"
-        app:showAsAction="always"/>
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="@string/button_cancelSite"
+        app:showAsAction="always" />
 </menu>
