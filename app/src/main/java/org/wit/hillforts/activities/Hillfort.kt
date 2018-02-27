@@ -68,12 +68,12 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             hillfort.lng = location.lng
             hillfort.zoom = location.zoom
             if (edit) {
-                app.hillfortStore.update(hillfort.copy())
+                app.hillforts.update(hillfort.copy())
                 setResult(200)
                 finish()
             } else {
                 if (hillfort.townland.isNotEmpty()) {
-                    app.hillfortStore.create(hillfort.copy())
+                    app.hillforts.create(hillfort.copy())
                     setResult(201)
                     finish()
                 } else {

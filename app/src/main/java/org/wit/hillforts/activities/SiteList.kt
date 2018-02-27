@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_site_list.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillforts.R
@@ -27,7 +29,8 @@ class SiteList : AppCompatActivity(), HillfortListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.hillfortStore.findAll(), this)
+        loadHillforts()
+//        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -36,7 +39,8 @@ class SiteList : AppCompatActivity(), HillfortListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter.notifyDataSetChanged()
+        loadHillforts()
+//        recyclerView.adapter.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -51,5 +55,15 @@ class SiteList : AppCompatActivity(), HillfortListener {
         startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), 200)
     }
 
+    private fun loadHillforts() {
+        async(UI) {
+            showHillforts(app.hillforts.findAll())
+        }
+    }
+
+    fun showHillforts (placemarks: List<HillfortModel>) {
+        recyclerView.adapter = HillfortAdapter(placemarks, this)
+        recyclerView.adapter.notifyDataSetChanged()
+    }
 
 }

@@ -1,9 +1,10 @@
-package org.wit.hillforts.model
+package org.wit.hillforts.models
+//Package should be models not model
 
 import org.wit.hillforts.models.HillfortModel
 
 interface HillfortStore {
-    fun findAll(): List<HillfortModel>
+    suspend fun findAll(): List<HillfortModel>
     fun create(hillfort: HillfortModel)
     fun update(hillfort: HillfortModel)
 }

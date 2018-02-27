@@ -2,7 +2,7 @@ package org.wit.hillforts.models
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.wit.hillforts.model.HillfortStore
+import org.wit.hillforts.models.HillfortStore
 
 var lastId = 0L
 
@@ -14,7 +14,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
 
     val hillforts = ArrayList<HillfortModel>()
 
-    override fun findAll(): List<HillfortModel> {
+    suspend override fun findAll(): List<HillfortModel> {
         return hillforts
     }
 
@@ -35,7 +35,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
             foundHillfort.lng = hillfort.lng
             foundHillfort.zoom = hillfort.zoom
         }
-        }
+    }
 
 
     internal fun logAll() {
