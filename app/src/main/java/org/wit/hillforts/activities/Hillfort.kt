@@ -57,6 +57,25 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
+        site_longitude.setOnClickListener {
+            if (hillfort.zoom != 0f) {
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
+            }
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
+        site_latitude.setOnClickListener {
+            if (hillfort.zoom != 0f) {
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
+            }
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
+
         //If site exists import site details
         if (intent.hasExtra("site_edit")) {
             //If site already exists populate with existing
@@ -101,7 +120,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
                 // Display Selected date in textbox
-            siteDateVisited.setText("" + day + "/" + month + "/" + year)
+            siteDateVisited.setText("" + day + "/" + month+1 + "/" + year)
         }
 
         siteDateVisited.setOnClickListener(){
@@ -112,7 +131,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in textbox
-                siteDateVisited.setText("" + dayOfMonth + "/" + monthOfYear + "/" + year)
+                siteDateVisited.setText("" + dayOfMonth + "/" + monthOfYear+1 + "/" + year)
             }, year, month, day)
             dpd.show()
         }
