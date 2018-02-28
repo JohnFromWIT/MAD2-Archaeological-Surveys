@@ -3,13 +3,18 @@ package org.wit.hillforts.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
+import android.text.InputType
 import android.view.*
+import android.widget.EditText
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_site_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 import org.wit.hillforts.R
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
@@ -47,8 +52,41 @@ class SiteList : AppCompatActivity(), HillfortListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<Hillfort>(200)
+            R.id.item_search -> {
+                search()}
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun search(){
+        val alert = AlertDialog.Builder(this)
+        var searchBox: EditText?=null
+
+        with (alert) {
+            setTitle("Search")
+            setMessage("Search Townland")
+            // Add any  input field here
+            searchBox=EditText(context)
+            searchBox!!.hint="Townland.."
+            searchBox!!.inputType = InputType.TYPE_CLASS_TEXT
+
+            setPositiveButton("Go") {
+                dialog, whichButton ->
+                //showMessage("display the game score or anything!")
+                dialog.dismiss()
+                val searchText = searchBox!!.text.toString()
+                loadHillfortsByTown(searchText)
+            }
+
+            setNegativeButton("Cancel") {
+                dialog, whichButton ->
+                //showMessage("Close the game or anything!")
+                dialog.dismiss()
+            }
+        }
+        val dialog = alert.create()
+        dialog.setView(searchBox)
+        dialog.show()
     }
 
     override fun onSiteClick(hillfort: HillfortModel) {
@@ -61,8 +99,15 @@ class SiteList : AppCompatActivity(), HillfortListener {
         }
     }
 
-    fun showHillforts (placemarks: List<HillfortModel>) {
-        recyclerView.adapter = HillfortAdapter(placemarks, this)
+    private fun loadHillfortsByTown(town: String) {
+        toast("Searched for "+ town)
+//        async(UI) {
+//            showHillforts(app.hillforts.findTown(town))
+//        }
+    }
+
+    fun showHillforts (hillforts: List<HillfortModel>) {
+        recyclerView.adapter = HillfortAdapter(hillforts, this)
         recyclerView.adapter.notifyDataSetChanged()
     }
 

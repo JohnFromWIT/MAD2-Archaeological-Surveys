@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="org.wit.hillforts.activities.SiteList">
 
-<android.support.design.widget.AppBarLayout
+    <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/accent"
@@ -18,14 +18,18 @@
         android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary"/>
-</android.support.design.widget.AppBarLayout>
+        app:titleTextColor="@color/common_google_signin_btn_text_dark_default" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout_editor_absoluteY="125dp">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.design.widget.CoordinatorLayout>

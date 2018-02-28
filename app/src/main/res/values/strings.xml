@@ -103,4 +103,6 @@
     <string name="mapThumbnail">Map Thumbnail</string>
     <string name="DeleteButton">Delete</string>
     <string name="btn_today">Today</string>
+    <string name="btn_visitedToday">Show Visited Today</string>
+    <string name="menu_search">Search</string>
 </resources>

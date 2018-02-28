@@ -23,7 +23,7 @@
                 android:id="@+id/toolbarSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary"/>
+                app:titleTextColor="@color/common_google_signin_btn_text_dark_default" />
         </android.support.design.widget.AppBarLayout>
 
         <ScrollView
@@ -93,8 +93,8 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="14sp" />
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/siteDateVisited"
@@ -107,19 +107,21 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnToday"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
+                    android:background="?attr/colorButtonNormal"
                     android:padding="8dp"
                     android:text="@string/btn_today"
                     android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="14sp" />
 
                 <android.support.design.widget.TextInputEditText
@@ -132,7 +134,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="14sp" />
 
                 <Button
@@ -140,12 +142,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@color/accent"
+                    android:background="?attr/colorButtonNormal"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addImage"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="16sp" />
 
                 <Button
@@ -153,12 +155,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@color/accent"
+                    android:background="?attr/colorButtonNormal"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/DeleteButton"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="16sp" />
 
             </LinearLayout>

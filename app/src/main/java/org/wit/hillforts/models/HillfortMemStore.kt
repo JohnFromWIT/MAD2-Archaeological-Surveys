@@ -25,7 +25,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     }
 
     override fun update(hillfort: HillfortModel) {
-        var foundHillfort: HillfortModel? = hillforts.find { p -> p.id == hillfort.id }
+        val foundHillfort: HillfortModel? = hillforts.find { p -> p.id == hillfort.id }
         if (foundHillfort != null) {
             foundHillfort.townland = hillfort.townland
             foundHillfort.county = hillfort.county
@@ -44,4 +44,8 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
     internal fun logAll() {
         hillforts.forEach { info("${it}") }
     }
+
+//    suspend override fun findTown(town: String): List<HillfortModel> {
+//        return hillforts
+//    }
 }

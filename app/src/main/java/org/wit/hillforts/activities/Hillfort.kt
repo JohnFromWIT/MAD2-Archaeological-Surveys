@@ -88,7 +88,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             site_longitude.text = hillfort.lng.toString()
 
             chooseImage.setImageBitmap(readImageFromPath(this, hillfort.picture))
-            if (hillfort.picture != null) {
+            if (hillfort.picture != "") {
                 btnAddImage.setText(R.string.button_changeImage)
             }
         }
@@ -118,9 +118,10 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-
+            val date =  "" + day + "/" + month+1 + "/" + year
                 // Display Selected date in textbox
-            siteDateVisited.setText("" + day + "/" + month+1 + "/" + year)
+
+            siteDateVisited.setText(date)
         }
 
         siteDateVisited.setOnClickListener(){
@@ -129,9 +130,10 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
 
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dateYear, monthOfYear, dayOfMonth ->
                 // Display Selected date in textbox
-                siteDateVisited.setText("" + dayOfMonth + "/" + monthOfYear+1 + "/" + year)
+                val date =  "" + dayOfMonth + "/" + monthOfYear+1 + "/" + dateYear
+                siteDateVisited.setText(date)
             }, year, month, day)
             dpd.show()
         }

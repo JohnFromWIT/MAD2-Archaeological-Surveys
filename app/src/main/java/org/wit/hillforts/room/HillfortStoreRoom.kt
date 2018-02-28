@@ -5,7 +5,6 @@ import android.content.Context
 import org.jetbrains.anko.coroutines.experimental.bg
 import org.wit.hillforts.models.HillfortStore
 import org.wit.hillforts.models.HillfortModel
-import org.wit.hillforts.room.HillfortDao
 
 class HillfortStoreRoom(val context: Context) : HillfortStore {
 
@@ -26,6 +25,15 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
         val hillforts = deferredHillforts.await()
         return hillforts
     }
+
+//    suspend override fun findTown(town: String): List<HillfortModel> {
+//        val deferredHillforts = bg {
+//            dao.findTown(town)
+//        }
+//        val hillforts = deferredHillforts.await()
+//        return hillforts
+//    }
+
 
     override fun create(hillfort: HillfortModel) {
         bg {
