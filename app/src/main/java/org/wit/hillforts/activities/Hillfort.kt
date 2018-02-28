@@ -1,13 +1,12 @@
 package org.wit.hillforts.activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import kotlinx.android.synthetic.main.activity_site_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
@@ -19,6 +18,8 @@ import org.wit.hillforts.helpers.showImagePicker
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
 import org.wit.hillforts.models.Location
+import java.util.*
+import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class Hillfort : AppCompatActivity(), AnkoLogger {
 
@@ -81,10 +82,40 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
         //Delete site and close activity
         btnDelete.setOnClickListener(){
-            app.hillforts.delete(hillfort)
-            finish()
+            alert("Are you sure you want to DELETE this Hillfort?","Delete") {
+                positiveButton("OK") {
+                    toast("Hillfort Deleted")
+                    app.hillforts.delete(hillfort)
+                    finish()
+                }
+                negativeButton("Keep"){
+                    toast("Delete Canceled")
+                }
+            }.show()
         }
 
+        btnToday.setOnClickListener(){
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+                // Display Selected date in textbox
+            siteDateVisited.setText("" + day + "/" + month + "/" + year)
+        }
+
+        siteDateVisited.setOnClickListener(){
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                // Display Selected date in textbox
+                siteDateVisited.setText("" + dayOfMonth + "/" + monthOfYear + "/" + year)
+            }, year, month, day)
+            dpd.show()
+        }
 //        //Close hillfort activity
 //        btnCancel.setOnClickListener(){
 //            finish()
@@ -127,7 +158,8 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_save -> {toast(R.string.toast_saved)
+
+            R.id.item_save -> {
                 hillfort.townland = siteTownland.text.toString()
                 hillfort.dateVisited = siteDateVisited.text.toString()
                 hillfort.county = siteCounty.text.toString()
@@ -137,19 +169,29 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
                 if (edit) {
                     app.hillforts.update(hillfort.copy())
                     setResult(200)
+                    toast(R.string.toast_saved)
                     finish()
                 } else {
                     if (hillfort.townland.isNotEmpty()) {
                         app.hillforts.create(hillfort.copy())
                         setResult(201)
+                        toast(R.string.toast_added)
                         finish()
                     } else {
                         toast(R.string.toast_enter_data)
                     }
                 }}
             R.id.item_cancel -> {
-                toast(R.string.toast_canceled)
-                finish()}
+                alert("Are you sure?","Cancel") {
+                    positiveButton("OK") {
+                        toast("Changes Canceled")
+                        finish()
+                    }
+                    negativeButton("Stay"){
+                        toast("Changes Not Canceled")
+                    }
+                }.show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

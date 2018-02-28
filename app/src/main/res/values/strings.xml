@@ -18,6 +18,7 @@
     <string name="hint_county">County..</string>
 
     <string name="toast_enter_data"> Please Complete Form </string>
+    <string name="toast_added">Hillfort Added</string>
     <string name="toast_saved">Saved</string>
     <string name="toast_canceled">Not Saved</string>
 
@@ -101,4 +102,5 @@
     <string name="LowerX">x</string>
     <string name="mapThumbnail">Map Thumbnail</string>
     <string name="DeleteButton">Delete</string>
+    <string name="btn_today">Today</string>
 </resources>
