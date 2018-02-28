@@ -18,6 +18,8 @@
     <string name="hint_county">County..</string>
 
     <string name="toast_enter_data"> Please Complete Form </string>
+    <string name="toast_saved">Saved</string>
+    <string name="toast_canceled">Not Saved</string>
 
     <string name="select_siteImage">Select an image</string>
     <string name="change_siteImage">Change image</string>

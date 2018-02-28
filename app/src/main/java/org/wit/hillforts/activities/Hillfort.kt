@@ -4,9 +4,12 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_site_list.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillforts.R
@@ -33,7 +36,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
         toolbarSite.title = title
         setSupportActionBar(toolbarSite)
-        
+
         //Open image picker
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
@@ -57,7 +60,6 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("site_edit")) {
             //If site already exists populate with existing
             edit = true
-            btnAdd.setText(R.string.button_saveSite)
             hillfort = intent.extras.getParcelable<HillfortModel>("site_edit")
             siteTownland.setText(hillfort.townland)
             siteDateVisited.setText(hillfort.dateVisited)
@@ -72,28 +74,10 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
         }
 
         //Add hilllfort model to list of sites
-        btnAdd.setOnClickListener() {
-
-            hillfort.townland = siteTownland.text.toString()
-            hillfort.dateVisited = siteDateVisited.text.toString()
-            hillfort.county = siteCounty.text.toString()
-            hillfort.lat =  location.lat
-            hillfort.lng = location.lng
-            hillfort.zoom = location.zoom
-            if (edit) {
-                app.hillforts.update(hillfort.copy())
-                setResult(200)
-                finish()
-            } else {
-                if (hillfort.townland.isNotEmpty()) {
-                    app.hillforts.create(hillfort.copy())
-                    setResult(201)
-                    finish()
-                } else {
-                    toast(R.string.toast_enter_data)
-                }
-            }
-        }
+//        btnAdd.setOnClickListener() {
+//
+//
+//        }
 
         //Delete site and close activity
         btnDelete.setOnClickListener(){
@@ -101,10 +85,14 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             finish()
         }
 
-        //Close hillfort activity
-        btnCancel.setOnClickListener(){
-            finish()
-        }
+//        //Close hillfort activity
+//        btnCancel.setOnClickListener(){
+//            finish()
+//        }
+//
+//        fun cancel(){
+//            finish()
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -130,5 +118,39 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_site, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_save -> {toast(R.string.toast_saved)
+                hillfort.townland = siteTownland.text.toString()
+                hillfort.dateVisited = siteDateVisited.text.toString()
+                hillfort.county = siteCounty.text.toString()
+                hillfort.lat =  location.lat
+                hillfort.lng = location.lng
+                hillfort.zoom = location.zoom
+                if (edit) {
+                    app.hillforts.update(hillfort.copy())
+                    setResult(200)
+                    finish()
+                } else {
+                    if (hillfort.townland.isNotEmpty()) {
+                        app.hillforts.create(hillfort.copy())
+                        setResult(201)
+                        finish()
+                    } else {
+                        toast(R.string.toast_enter_data)
+                    }
+                }}
+            R.id.item_cancel -> {
+                toast(R.string.toast_canceled)
+                finish()}
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

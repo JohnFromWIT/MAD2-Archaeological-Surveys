@@ -45,6 +45,7 @@
                         android:id="@+id/chooseImage"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
                         android:contentDescription="@string/SiteImage"
                         android:maxHeight="150dp"
                         android:maxWidth="200dp"
@@ -118,19 +119,6 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/btnAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/accent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_addSite"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-                <Button
                     android:id="@+id/btnAddImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,19 +141,6 @@
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/DeleteButton"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnCancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/accent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_cancelSite"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
