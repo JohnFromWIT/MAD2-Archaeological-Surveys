@@ -27,3 +27,4 @@ Search not implemented
 
 Issues:
 The app sometimes crashes on loading hillforts list
+Date month starts at zero
