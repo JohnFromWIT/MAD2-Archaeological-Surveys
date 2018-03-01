@@ -118,7 +118,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-            val date =  "" + day + "/" + month+1 + "/" + year
+            val date =  "" + day + "/" + month + "/" + year
                 // Display Selected date in textbox
 
             siteDateVisited.setText(date)
@@ -132,7 +132,7 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dateYear, monthOfYear, dayOfMonth ->
                 // Display Selected date in textbox
-                val date =  "" + dayOfMonth + "/" + monthOfYear+1 + "/" + dateYear
+                val date =  "" + dayOfMonth + "/" + monthOfYear + "/" + dateYear
                 siteDateVisited.setText(date)
             }, year, month, day)
             dpd.show()

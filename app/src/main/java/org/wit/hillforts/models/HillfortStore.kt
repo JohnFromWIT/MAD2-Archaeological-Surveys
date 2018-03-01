@@ -1,7 +1,5 @@
 package org.wit.hillforts.models
-//Package should be models not model
 
-import org.wit.hillforts.models.HillfortModel
 
 interface HillfortStore {
     suspend fun findAll(): List<HillfortModel>
@@ -9,4 +7,5 @@ interface HillfortStore {
     fun update(hillfort: HillfortModel)
     fun delete(hillfort: HillfortModel)
 //    suspend fun findTown(town: String): List<HillfortModel>
+//    suspend fun sortByTownland(): List<HillfortModel>
 }

@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.InputType
 import android.view.*
 import android.widget.EditText
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_site_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -24,6 +23,7 @@ class SiteList : AppCompatActivity(), HillfortListener {
 
     lateinit var app: MainApp
 
+    //Activity start
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_site_list)
@@ -38,17 +38,20 @@ class SiteList : AppCompatActivity(), HillfortListener {
 //        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
 
     }
+    //Menu options created
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Recieve result from another activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         loadHillforts()
 //        recyclerView.adapter.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    //Menu Option Selected
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<Hillfort>(200)
@@ -58,6 +61,7 @@ class SiteList : AppCompatActivity(), HillfortListener {
         return super.onOptionsItemSelected(item)
     }
 
+    //Search - Not fully implemented
     fun search(){
         val alert = AlertDialog.Builder(this)
         var searchBox: EditText?=null
@@ -89,23 +93,27 @@ class SiteList : AppCompatActivity(), HillfortListener {
         dialog.show()
     }
 
+    //Site Selected from list
     override fun onSiteClick(hillfort: HillfortModel) {
         startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), 200)
     }
 
+    //Load list of sites
     private fun loadHillforts() {
         async(UI) {
             showHillforts(app.hillforts.findAll())
         }
     }
 
+    //Load Search Results - Not Currently implemented
     private fun loadHillfortsByTown(town: String) {
         toast("Searched for "+ town)
 //        async(UI) {
-//            showHillforts(app.hillforts.findTown(town))
+//            showHillforts(app.hillforts.sortByTownland())
 //        }
     }
 
+    //Update List
     fun showHillforts (hillforts: List<HillfortModel>) {
         recyclerView.adapter = HillfortAdapter(hillforts, this)
         recyclerView.adapter.notifyDataSetChanged()

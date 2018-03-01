@@ -1,4 +1,5 @@
 package org.wit.hillforts.activities
+//Not Currently Implemented
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

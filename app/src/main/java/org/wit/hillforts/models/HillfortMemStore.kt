@@ -2,7 +2,6 @@ package org.wit.hillforts.models
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.wit.hillforts.models.HillfortStore
 
 var lastId = 0L
 
@@ -14,16 +13,19 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
 
     val hillforts = ArrayList<HillfortModel>()
 
+    //FInd All
     suspend override fun findAll(): List<HillfortModel> {
         return hillforts
     }
 
+    //Create
     override fun create(hillfort: HillfortModel) {
         hillfort.id = getId()
         hillforts.add(hillfort)
         logAll()
     }
 
+    //Update
     override fun update(hillfort: HillfortModel) {
         val foundHillfort: HillfortModel? = hillforts.find { p -> p.id == hillfort.id }
         if (foundHillfort != null) {
@@ -37,15 +39,23 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
         }
     }
 
+    //Delete
     override fun delete(hillfort: HillfortModel) {
         hillforts.remove(hillfort)
     }
 
+    //Log All
     internal fun logAll() {
         hillforts.forEach { info("${it}") }
     }
 
+    //Search Method - Not Currently Implemented
 //    suspend override fun findTown(town: String): List<HillfortModel> {
 //        return hillforts
+//    }
+
+    //Sort Method - Not Currently Implemented
+//    suspend override fun sortByTownland(): List<HillfortModel>{
+//       return hillforts
 //    }
 }

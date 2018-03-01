@@ -17,7 +17,7 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
         dao = database.hillfortDao()
     }
 
-
+    //coroutine - request all and await result
     suspend override fun findAll(): List<HillfortModel> {
         val deferredHillforts = bg {
             dao.findAll()
@@ -26,6 +26,7 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
         return hillforts
     }
 
+    //coroutine search - Not Currently Implemented
 //    suspend override fun findTown(town: String): List<HillfortModel> {
 //        val deferredHillforts = bg {
 //            dao.findTown(town)
@@ -34,22 +35,36 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
 //        return hillforts
 //    }
 
+    //coroutine sort - Not Currently Implemented
+//    suspend override fun sortByTownland(): List<HillfortModel>{
+//        val sortedHillforts = bg {
+//            dao.sortByTownland()
+//        }
+//        val hillforts = sortedHillforts.await()
+//        return hillforts
+//    }
 
+    //coroutine - create
     override fun create(hillfort: HillfortModel) {
         bg {
             dao.create(hillfort)
         }
     }
 
+    //coroutine - update
     override fun update(hillfort: HillfortModel) {
         bg{
             dao.update(hillfort)
         }
     }
 
+    //coroutine - delete
     override fun delete(hillfort: HillfortModel) {
         bg {
             dao.deleteHillfort(hillfort)
         }
     }
+
+
+
 }
