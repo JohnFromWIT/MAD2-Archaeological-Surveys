@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Hillforts</string>
+    <string name="app_name">Yore Explore</string>
 
     <string name="menu_addSite">Add</string>
     <string name="menu_cancelSite">Cancel</string>
+
+    <!--Splash Screen-->
+    <string name="Slogan">Do you know the way?</string>
+    <string name="btn_CloseSplash">Explore</string>
+    <string name="Alt_AppLogo">App Logo</string>
 
     <string name="button_addSite">Add Site</string>
     <string name="button_cancelSite">Cancel</string>

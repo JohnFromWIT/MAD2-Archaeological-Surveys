@@ -14,7 +14,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/accent"
+            android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
             app:elevation="0dip"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -117,11 +117,11 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:background="?attr/colorButtonNormal"
+                    android:background="@color/colorPrimary"
                     android:padding="8dp"
                     android:text="@string/btn_today"
                     android:textAlignment="center"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textColor="@color/colorPrimaryTextLight"
                     android:textSize="14sp" />
 
                 <android.support.design.widget.TextInputEditText
@@ -142,12 +142,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="?attr/colorButtonNormal"
+                    android:background="@color/colorPrimary"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addImage"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textColor="@color/colorPrimaryTextLight"
                     android:textSize="16sp" />
 
                 <Button
@@ -155,12 +155,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="?attr/colorButtonNormal"
+                    android:background="@color/colorPrimary"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/DeleteButton"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textColor="@color/colorPrimaryTextLight"
                     android:textSize="16sp" />
 
             </LinearLayout>

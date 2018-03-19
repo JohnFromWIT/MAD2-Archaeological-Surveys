@@ -40,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarke
                 .draggable(true)
                 .position(loc)
         map.setOnMarkerDragListener(this)
-
+        map.setOnMarkerClickListener(this)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }

@@ -36,8 +36,8 @@ class SiteList : AppCompatActivity(), HillfortListener {
         recyclerView.layoutManager = layoutManager
         loadHillforts()
 //        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
-
     }
+
     //Menu options created
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -95,11 +95,13 @@ class SiteList : AppCompatActivity(), HillfortListener {
 
     //Site Selected from list
     override fun onSiteClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), 200)
+        startActivityForResult(intentFor<Hillfort>().putExtra("site_edit", hillfort), 201)
     }
 
     //Load list of sites
     private fun loadHillforts() {
+//        showHillforts( app.hillforts.findAll())
+
         async(UI) {
             showHillforts(app.hillforts.findAll())
         }

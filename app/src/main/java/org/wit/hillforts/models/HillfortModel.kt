@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class HillfortModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
-                          var townland: String = "",
+                         var townland: String = "",
                          var picture: String = "",
                          var dateVisited: String = "",
                          var county: String = "",
