@@ -9,6 +9,9 @@
     <string name="btn_CloseSplash">Explore</string>
     <string name="Alt_AppLogo">App Logo</string>
 
+    <!--Map Activity-->
+    <string name="title_activity_site_map">All Site</string>
+
     <string name="button_addSite">Add Site</string>
     <string name="button_cancelSite">Cancel</string>
     <string name="button_saveSite">Save</string>
@@ -29,6 +32,11 @@
 
     <string name="select_siteImage">Select an image</string>
     <string name="change_siteImage">Change image</string>
+
+
+
+
+
     <!--Below here is boiler plate. Wanted Removed-->
 
     <!-- Strings related to Settings -->

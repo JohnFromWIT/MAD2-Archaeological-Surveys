@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Hillfort"></activity>
+        <activity android:name=".activities.Hillfort" />
         <activity android:name=".activities.SiteList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.SiteMapActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme"></activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -27,11 +32,12 @@
 
         <activity
             android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="org.wit.hillforts.activities.Hillfort"/>
+            android:value="org.wit.hillforts.activities.Hillfort" />
+
     </application>
 
 </manifest>

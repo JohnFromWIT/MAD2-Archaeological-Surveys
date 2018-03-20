@@ -11,9 +11,7 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_site_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivityForResult
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.wit.hillforts.R
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
@@ -55,10 +53,24 @@ class SiteList : AppCompatActivity(), HillfortListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<Hillfort>(200)
+            R.id.item_map -> startActivity<SiteMapActivity>()
             R.id.item_search -> {
                 search()}
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSiteLongClick(hillfort: HillfortModel) {
+        alert("Are you sure you want to DELETE this Hillfort?","Delete") {
+            positiveButton("OK") {
+                toast("Hillfort Deleted")
+                app.hillforts.delete(hillfort)
+                loadHillforts()
+            }
+            negativeButton("Keep"){
+                toast("Delete Canceled")
+            }
+        }.show()
     }
 
     //Search - Not fully implemented
