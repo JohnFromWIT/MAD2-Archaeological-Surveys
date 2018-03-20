@@ -14,8 +14,8 @@ class MainApp : Application(), AnkoLogger {
     //Start App and connect storeroom
     override fun onCreate() {
         super.onCreate()
-        hillforts = HillfortMemStore()
-        // placemarks = PlacemarkStoreRoom (applicationContext)
+//        hillforts = HillfortMemStore()
+         hillforts = HillfortStoreRoom (applicationContext)
         info("App Runing")
     }
 
