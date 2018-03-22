@@ -93,12 +93,6 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             }
         }
 
-        //Add hilllfort model to list of sites
-//        btnAdd.setOnClickListener() {
-//
-//
-//        }
-
         //Delete site and close activity
         btnDelete.setOnClickListener(){
             alert("Are you sure you want to DELETE this Hillfort?","Delete") {
@@ -145,6 +139,34 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 //        fun cancel(){
 //            finish()
 //        }
+
+        //Map Box
+        mapView.onCreate(savedInstanceState);
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -177,31 +199,36 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
+    fun save(){
+        hillfort.townland = siteTownland.text.toString()
+        hillfort.dateVisited = siteDateVisited.text.toString()
+        hillfort.county = siteCounty.text.toString()
+        hillfort.lat =  location.lat
+        hillfort.lng = location.lng
+        hillfort.zoom = location.zoom
+        if (edit) {
+            app.hillforts.update(hillfort.copy())
+            setResult(200)
+            toast(R.string.toast_saved)
+            finish()
+        } else {
+            if (hillfort.townland.isNotEmpty()) {
+                app.hillforts.create(hillfort.copy())
+                setResult(201)
+                toast(R.string.toast_added)
+                finish()
+            } else {
+                toast(R.string.toast_enter_data)
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
 
             R.id.item_save -> {
-                hillfort.townland = siteTownland.text.toString()
-                hillfort.dateVisited = siteDateVisited.text.toString()
-                hillfort.county = siteCounty.text.toString()
-                hillfort.lat =  location.lat
-                hillfort.lng = location.lng
-                hillfort.zoom = location.zoom
-                if (edit) {
-                    app.hillforts.update(hillfort.copy())
-                    setResult(200)
-                    toast(R.string.toast_saved)
-                    finish()
-                } else {
-                    if (hillfort.townland.isNotEmpty()) {
-                        app.hillforts.create(hillfort.copy())
-                        setResult(201)
-                        toast(R.string.toast_added)
-                        finish()
-                    } else {
-                        toast(R.string.toast_enter_data)
-                    }
-                }}
+                save()
+}
             R.id.item_cancel -> {
                 alert("Are you sure?","Cancel") {
                     positiveButton("OK") {
