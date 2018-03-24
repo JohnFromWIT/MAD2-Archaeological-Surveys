@@ -18,7 +18,9 @@
     <string name="button_addImage"> Add Image </string>
     <string name="button_changeImage"> Change Image </string>
     <string name="button_location">Set Location</string>
+    <string name="location_here">Here</string>
 
+    <!--Site Activity-->
     <string name="hint_townland">Townland..</string>
     <string name="hint_dateVisited">Date Visited..</string>
     <string name="hint_latitude">Latitude..</string>

@@ -8,4 +8,5 @@ interface HillfortStore {
     fun delete(hillfort: HillfortModel)
 //    suspend fun findTown(town: String): List<HillfortModel>
 //    suspend fun sortByTownland(): List<HillfortModel>
+    suspend fun findById(id:Long) : HillfortModel?
 }

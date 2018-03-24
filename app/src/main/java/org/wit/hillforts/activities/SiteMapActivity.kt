@@ -15,6 +15,7 @@ import org.wit.hillforts.main.MainApp
 //Correct Imports????
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.wit.hillforts.helpers.readImageFromPath
 
 class SiteMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -55,7 +56,13 @@ class SiteMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
+        async(UI) {
+            val tag = marker.tag as Long
+            val hillfort = app.hillforts.findById(tag)
+            currentTitle.text = hillfort!!.townland
+            currentCounty.text = hillfort!!.county
+            imageView.setImageBitmap(readImageFromPath(this@SiteMapActivity, hillfort.picture))
+        }
         return false
     }
 
@@ -71,6 +78,7 @@ class SiteMapActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             }
         }
     }
+
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)

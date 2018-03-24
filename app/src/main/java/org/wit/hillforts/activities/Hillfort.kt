@@ -1,20 +1,27 @@
 package org.wit.hillforts.activities
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillforts.R
-import org.wit.hillforts.helpers.readImage
-import org.wit.hillforts.helpers.readImageFromPath
-import org.wit.hillforts.helpers.showImagePicker
+import org.wit.hillforts.helpers.*
 import org.wit.hillforts.main.MainApp
 import org.wit.hillforts.models.HillfortModel
 import org.wit.hillforts.models.Location
@@ -25,56 +32,33 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     lateinit var app: MainApp
+    lateinit var map: GoogleMap
+
     var edit = false
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
+    val defaultLocation = Location(52.245696, -7.139102, 15f)
     var location = Location(52.245696, -7.139102, 15f)
+
+    private lateinit var locationService: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
+        mapView.onCreate(savedInstanceState);
         app = application as MainApp
+        locationService = LocationServices.getFusedLocationProviderClient(this)
 
         toolbarSite.title = title
         setSupportActionBar(toolbarSite)
 
-        //Open image picker
-        chooseImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
-        }
+        btnHere.isEnabled = false
 
-        btnAddImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
+        //Map Box
+        mapView.getMapAsync {
+            map = it
+            configureMap()
         }
-
-        //Open map
-        siteLocation.setOnClickListener {
-            if (hillfort.zoom != 0f) {
-                location.lat =  hillfort.lat
-                location.lng = hillfort.lng
-                location.zoom = hillfort.zoom
-            }
-            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
-        }
-
-        site_longitude.setOnClickListener {
-            if (hillfort.zoom != 0f) {
-                location.lat =  hillfort.lat
-                location.lng = hillfort.lng
-                location.zoom = hillfort.zoom
-            }
-            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
-        }
-
-        site_latitude.setOnClickListener {
-            if (hillfort.zoom != 0f) {
-                location.lat =  hillfort.lat
-                location.lng = hillfort.lng
-                location.zoom = hillfort.zoom
-            }
-            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
-        }
-
 
         //If site exists import site details
         if (intent.hasExtra("site_edit")) {
@@ -88,12 +72,61 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             site_longitude.text = hillfort.lng.toString()
 
             chooseImage.setImageBitmap(readImageFromPath(this, hillfort.picture))
-            if (hillfort.picture != "") {
-                btnAddImage.setText(R.string.button_changeImage)
-            }
+//            if (hillfort.picture != null) {
+//                btnAddImage.setText(R.string.button_changeImage)
+//            }
+        }else{
+            hillfort.lat = defaultLocation.lat
+            hillfort.lng = defaultLocation.lng
+            hillfort.zoom = defaultLocation.zoom
         }
 
-        //Delete site and close activity
+
+        btnHere.setOnClickListener {
+            setCurrentLocation()
+        }
+
+        //Open image picker
+        chooseImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
+
+//        btnAddImage.setOnClickListener {
+//            showImagePicker(this, IMAGE_REQUEST)
+//        }
+
+
+        //Open map
+        siteLocation.setOnClickListener {
+            if (hillfort.zoom != 0f) {
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
+            }
+            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+        }
+
+
+//        site_longitude.setOnClickListener {
+//            if (hillfort.zoom != 0f) {
+//                location.lat =  hillfort.lat
+//                location.lng = hillfort.lng
+//                location.zoom = hillfort.zoom
+//            }
+//            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+//        }
+//
+//        site_latitude.setOnClickListener {
+//            if (hillfort.zoom != 0f) {
+//                location.lat =  hillfort.lat
+//                location.lng = hillfort.lng
+//                location.zoom = hillfort.zoom
+//            }
+//            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+//        }
+
+
+         //Delete site and close activity
         btnDelete.setOnClickListener(){
             alert("Are you sure you want to DELETE this Hillfort?","Delete") {
                 positiveButton("OK") {
@@ -140,8 +173,44 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 //            finish()
 //        }
 
-        //Map Box
-        mapView.onCreate(savedInstanceState);
+
+    }
+
+    fun configureMap() {
+        map.uiSettings.setZoomControlsEnabled(true)
+        val loc = LatLng(hillfort.lat, hillfort.lng)
+        val options = MarkerOptions().title(hillfort.townland).position(loc)
+        map.addMarker(options)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, hillfort.zoom))
+    }
+
+
+
+
+
+    override fun onStart() {
+        super.onStart()
+        if (checkLocationPermissions(this)) {
+            btnHere.isEnabled = true
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            btnHere.isEnabled = true
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun setCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            defaultLocation.lat = it.latitude
+            defaultLocation.lng = it.longitude
+            hillfort.lat = it.latitude
+            hillfort.lng = it.longitude
+            configureMap()
+        }
     }
 
     override fun onDestroy() {
@@ -172,23 +241,25 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            //If returning from iage picker, update image details.
+            //If returning from image picker, update image details.
             IMAGE_REQUEST -> {
                 if (data != null) {
                     hillfort.picture = data.getData().toString()
                     chooseImage.setImageBitmap(readImage(this, resultCode, data))
-                    btnAddImage.setText(R.string.button_changeImage)
+//                    btnAddImage.setText(R.string.button_changeImage)
                 }
             }
             //If returning from map update location details
             LOCATION_REQUEST -> {
                 if (data != null) {
                     val location = data.extras.getParcelable<Location>("location")
+                    map.clear()
                     hillfort.lat = location.lat
                     hillfort.lng = location.lng
                     hillfort.zoom = location.zoom
-                    site_latitude.text = hillfort.lat.toString()
-                    site_longitude.text = hillfort.lng.toString()
+//                    site_latitude.text = hillfort.lat.toString()
+//                    site_longitude.text = hillfort.lng.toString()
+                    configureMap()
                 }
             }
         }

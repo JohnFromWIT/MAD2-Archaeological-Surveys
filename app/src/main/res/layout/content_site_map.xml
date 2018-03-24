@@ -39,7 +39,7 @@ tools:showIn="@layout/activity_site_map">
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/currentDescription"
+            android:id="@+id/currentCounty"
             android:layout_width="135dp"
             android:layout_height="25dp"
             android:layout_marginBottom="8dp"

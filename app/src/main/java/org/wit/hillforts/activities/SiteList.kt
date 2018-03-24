@@ -73,6 +73,7 @@ class SiteList : AppCompatActivity(), HillfortListener {
         }.show()
     }
 
+
     //Search - Not fully implemented
     fun search(){
         val alert = AlertDialog.Builder(this)

@@ -58,4 +58,9 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
 //    suspend override fun sortByTownland(): List<HillfortModel>{
 //       return hillforts
 //    }
+
+    suspend override fun findById(id:Long) : HillfortModel? {
+        val foundHillfort: HillfortModel? = hillforts.find { p -> p.id == id }
+        return foundHillfort
+    }
 }
