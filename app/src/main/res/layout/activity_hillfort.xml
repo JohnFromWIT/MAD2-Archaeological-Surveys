@@ -25,12 +25,12 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="727dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -52,39 +52,41 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
-        <ImageView
-            android:id="@+id/siteLocation"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/chooseImage"
-            android:layout_margin="4dp"
-            android:contentDescription="@string/mapThumbnail"
-            app:srcCompat="@mipmap/ic_map"
-            tools:layout_editor_absoluteX="124dp"
-            tools:layout_editor_absoluteY="84dp" />
-
         <TextView
             android:id="@+id/site_longitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/chooseImage"
             android:layout_margin="2dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
             android:layout_toEndOf="@+id/siteLocation"
             android:text="@string/hint_longitude"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="84dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/site_latitude"
+            app:layout_constraintHorizontal_bias="0.419"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
         <TextView
             android:id="@+id/site_latitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="98dp"
+            android:layout_height="23dp"
             android:layout_below="@+id/site_longitude"
             android:layout_margin="2dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/siteLocation"
             android:text="@string/hint_latitude"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="103dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.318"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
 
         <android.support.design.widget.TextInputEditText
@@ -92,6 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:hint="@string/hint_townland"
             android:inputType="text"
             android:maxLength="25"
@@ -99,14 +103,19 @@
             android:padding="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="158dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+            app:layout_constraintVertical_bias="0.119"
+            tools:layout_editor_absoluteX="8dp" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/siteDateVisited"
-            android:layout_width="match_parent"
+            android:layout_width="392dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:focusable="false"
             android:hint="@string/hint_dateVisited"
             android:inputType="date"
@@ -115,27 +124,37 @@
             android:padding="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="182dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/siteTownland" />
 
         <Button
             android:id="@+id/btnToday"
-            android:layout_width="match_parent"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:background="@color/colorPrimary"
             android:padding="8dp"
             android:text="@string/btn_today"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryTextLight"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="243dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toEndOf="@+id/siteDateVisited"
+            tools:layout_editor_absoluteY="208dp" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/siteCounty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:hint="@string/hint_county"
             android:inputType="text"
             android:maxLength="25"
@@ -143,14 +162,22 @@
             android:padding="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="14sp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="444dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddImage"
+            app:layout_constraintVertical_bias="0.054" />
 
         <Button
             android:id="@+id/btnAddImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
@@ -158,14 +185,22 @@
             android:text="@string/button_addImage"
             android:textColor="@color/colorPrimaryTextLight"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="386dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDelete"
+            app:layout_constraintVertical_bias="0.022" />
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
@@ -173,21 +208,24 @@
             android:text="@string/DeleteButton"
             android:textColor="@color/colorPrimaryTextLight"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="325dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/siteDateVisited"
+            app:layout_constraintVertical_bias="0.017" />
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
-            android:layout_width="350dp"
+            android:layout_width="504dp"
             android:layout_height="149dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="68dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnHere"
@@ -198,8 +236,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Here"
-            app:layout_constraintBottom_toTopOf="@+id/mapView"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.578"
+            app:layout_constraintStart_toEndOf="@+id/mapView"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddImage"
+            app:layout_constraintVertical_bias="0.53" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

@@ -97,14 +97,14 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
 
         //Open map
-        siteLocation.setOnClickListener {
-            if (hillfort.zoom != 0f) {
-                location.lat =  hillfort.lat
-                location.lng = hillfort.lng
-                location.zoom = hillfort.zoom
-            }
-            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
-        }
+//        siteLocation.setOnClickListener {
+//            if (hillfort.zoom != 0f) {
+//                location.lat =  hillfort.lat
+//                location.lng = hillfort.lng
+//                location.zoom = hillfort.zoom
+//            }
+//            startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
+//        }
 
 
 //        site_longitude.setOnClickListener {

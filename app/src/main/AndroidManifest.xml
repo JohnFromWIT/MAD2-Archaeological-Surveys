@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".main.MainApp"
         android:allowBackup="true"
@@ -12,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.Hillfort" />
         <activity android:name=".activities.SiteList">
             <intent-filter>
@@ -23,13 +29,11 @@
         <activity
             android:name=".activities.SiteMapActivity"
             android:label="@string/title_activity_maps"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -42,6 +46,9 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="org.wit.hillforts.activities.Hillfort" />
 
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
     </application>
 
 </manifest>

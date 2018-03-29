@@ -54,8 +54,8 @@ class SiteList : AppCompatActivity(), HillfortListener {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<Hillfort>(200)
             R.id.item_map -> startActivity<SiteMapActivity>()
-            R.id.item_search -> {
-                search()}
+            R.id.item_search -> {startActivity<LoginActivity>()}
+//                search()}
         }
         return super.onOptionsItemSelected(item)
     }
