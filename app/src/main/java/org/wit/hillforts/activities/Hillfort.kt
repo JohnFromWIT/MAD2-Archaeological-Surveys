@@ -91,9 +91,9 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
-//        btnAddImage.setOnClickListener {
-//            showImagePicker(this, IMAGE_REQUEST)
-//        }
+        btnAddImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
 
 
         //Open map
@@ -126,30 +126,22 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 //        }
 
 
-         //Delete site and close activity
-        btnDelete.setOnClickListener(){
-            alert("Are you sure you want to DELETE this Hillfort?","Delete") {
-                positiveButton("OK") {
-                    toast("Hillfort Deleted")
-                    app.hillforts.delete(hillfort)
-                    finish()
-                }
-                negativeButton("Keep"){
-                    toast("Delete Canceled")
-                }
-            }.show()
-        }
+//         //Delete site and close activity
+//        btnDelete.setOnClickListener(){
+//            deleteSite();
+//        }
 
-        btnToday.setOnClickListener(){
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-            val date =  "" + day + "/" + month + "/" + year
-                // Display Selected date in textbox
 
-            siteDateVisited.setText(date)
-        }
+//        btnToday.setOnClickListener(){
+//            val c = Calendar.getInstance()
+//            val year = c.get(Calendar.YEAR)
+//            val month = c.get(Calendar.MONTH)
+//            val day = c.get(Calendar.DAY_OF_MONTH)
+//            val date =  "" + day + "/" + month + "/" + year
+//                // Display Selected date in textbox
+//
+//            siteDateVisited.setText(date)
+//        }
 
         siteDateVisited.setOnClickListener(){
             val c = Calendar.getInstance()
@@ -211,6 +203,20 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
             hillfort.lng = it.longitude
             configureMap()
         }
+    }
+
+    fun deleteSite()
+    {
+        alert("Are you sure you want to DELETE this Hillfort?","Delete") {
+            positiveButton("OK") {
+                toast("Hillfort Deleted")
+                app.hillforts.delete(hillfort)
+                finish()
+            }
+            negativeButton("Keep"){
+                toast("Delete Canceled")
+            }
+        }.show()
     }
 
     override fun onDestroy() {
@@ -299,7 +305,10 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
 
             R.id.item_save -> {
                 save()
-}
+            }
+            R.id.item_delete -> {
+                deleteSite()
+            }
             R.id.item_cancel -> {
                 alert("Are you sure?","Cancel") {
                     positiveButton("OK") {

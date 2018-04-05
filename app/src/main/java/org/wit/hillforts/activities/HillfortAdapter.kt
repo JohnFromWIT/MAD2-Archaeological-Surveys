@@ -16,6 +16,7 @@ import org.wit.hillforts.models.HillfortModel
 interface HillfortListener {
     fun onSiteClick(hillfort: HillfortModel)
     fun onSiteLongClick(hillfort: HillfortModel)
+    fun onSiteNewRating(hillfort: HillfortModel, number: Number)
 }
 
 class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
@@ -40,7 +41,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
             itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.picture))
             itemView.setOnClickListener { listener.onSiteClick(hillfort) }
             itemView.setOnLongClickListener { listener.onSiteLongClick(hillfort); true }
-
+            itemView.siteRating.setOnClickListener{listener.onSiteNewRating(hillfort, itemView.siteRating.numStars)}
         }
     }
 }

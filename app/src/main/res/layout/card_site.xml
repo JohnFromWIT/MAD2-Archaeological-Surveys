@@ -33,22 +33,31 @@
 
         <TextView
             android:id="@+id/siteTownland"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imageIcon"
             android:layout_toEndOf="@+id/imageIcon"
             android:maxWidth="500dp"
-            android:textColor="@color/cardview_light_background"
+            android:textColor="@color/cardview_dark_background"
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/siteDateVisited"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/siteTownland"
             android:layout_toEndOf="@+id/imageIcon"
             android:maxWidth="500dp"
-            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+            android:textColor="@color/cardview_dark_background" />
+
+        <RatingBar
+            android:id="@+id/siteRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="528dp"
+            android:numStars="3" />
 
     </RelativeLayout>
 

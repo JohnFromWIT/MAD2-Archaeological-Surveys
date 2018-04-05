@@ -36,13 +36,13 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
 //    }
 
     //coroutine sort - Not Currently Implemented
-//    suspend override fun sortByTownland(): List<HillfortModel>{
-//        val sortedHillforts = bg {
-//            dao.sortByTownland()
-//        }
-//        val hillforts = sortedHillforts.await()
-//        return hillforts
-//    }
+    suspend override fun sortByTownland(town: String): List<HillfortModel>{
+        val sortedHillforts = bg {
+            dao.sortByTownland(town)
+        }
+        val hillforts = sortedHillforts.await()
+        return hillforts
+    }
 
     //coroutine - create
     override fun create(hillfort: HillfortModel) {

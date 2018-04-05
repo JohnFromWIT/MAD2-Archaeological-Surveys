@@ -131,4 +131,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="button_deleteSite">Delete</string>
 </resources>

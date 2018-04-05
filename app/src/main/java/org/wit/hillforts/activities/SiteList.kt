@@ -9,6 +9,7 @@ import android.text.InputType
 import android.view.*
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_site_list.*
+import kotlinx.android.synthetic.main.card_site.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.*
@@ -34,6 +35,9 @@ class SiteList : AppCompatActivity(), HillfortListener {
         recyclerView.layoutManager = layoutManager
         loadHillforts()
 //        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
+//        siteRating.setOnClickListener(){
+//
+//        }
     }
 
     //Menu options created
@@ -54,8 +58,9 @@ class SiteList : AppCompatActivity(), HillfortListener {
         when (item?.itemId) {
             R.id.item_add -> startActivityForResult<Hillfort>(200)
             R.id.item_map -> startActivity<SiteMapActivity>()
-            R.id.item_search -> {startActivity<LoginActivity>()}
-//                search()}
+            R.id.item_search ->search()
+//            {startActivity<LoginActivity>()}
+//
         }
         return super.onOptionsItemSelected(item)
     }
@@ -73,8 +78,11 @@ class SiteList : AppCompatActivity(), HillfortListener {
         }.show()
     }
 
+    override fun onSiteNewRating(hillfort: HillfortModel, number: Number) {
+        alert("Rating"+number);
+    }
 
-    //Search - Not fully implemented
+        //Search - Not fully implemented
     fun search(){
         val alert = AlertDialog.Builder(this)
         var searchBox: EditText?=null
@@ -123,9 +131,9 @@ class SiteList : AppCompatActivity(), HillfortListener {
     //Load Search Results - Not Currently implemented
     private fun loadHillfortsByTown(town: String) {
         toast("Searched for "+ town)
-//        async(UI) {
-//            showHillforts(app.hillforts.sortByTownland())
-//        }
+        async(UI) {
+            showHillforts(app.hillforts.sortByTownland(town))
+        }
     }
 
     //Update List
