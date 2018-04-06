@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Yore Explore</string>
 
+    <!--Menu Strings-->
     <string name="menu_addSite">Add</string>
     <string name="menu_cancelSite">Cancel</string>
+
+    <string name="action_map">Map</string>
+    <string name="action_sites">Sites</string>
+    <string name="action_profile">Profile</string>
+    <string name="action_about">About</string>
 
     <!--Splash Screen-->
     <string name="Slogan">Do you know the way?</string>
@@ -132,4 +138,10 @@
         completions."
     </string>
     <string name="button_deleteSite">Delete</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 </resources>

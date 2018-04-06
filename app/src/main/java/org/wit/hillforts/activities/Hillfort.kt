@@ -263,8 +263,8 @@ class Hillfort : AppCompatActivity(), AnkoLogger {
                     hillfort.lat = location.lat
                     hillfort.lng = location.lng
                     hillfort.zoom = location.zoom
-//                    site_latitude.text = hillfort.lat.toString()
-//                    site_longitude.text = hillfort.lng.toString()
+                    site_latitude.text = hillfort.lat.toString()
+                    site_longitude.text = hillfort.lng.toString()
                     configureMap()
                 }
             }

@@ -38,7 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarke
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
                 .title("Site")
-                .snippet("GPS : " + loc.toString())
+//                .snippet("GPS : " + loc.toString())
                 .draggable(true)
                 .position(loc)
         map.setOnMarkerDragListener(this)
@@ -48,6 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarke
     }
 
     override fun onMarkerDragStart(marker: Marker) {
+
     }
 
     override fun onMarkerDrag(marker: Marker) {
