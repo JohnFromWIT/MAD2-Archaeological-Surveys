@@ -12,13 +12,13 @@ interface HillfortDao {
     @Query("SELECT * FROM HillfortModel")
     fun findAll(): List<HillfortModel>
 
-    @Query("SELECT * FROM HillfortModel where id = :arg0")
-    fun sortByTownland(arg0: String): List<HillfortModel>
+    @Query("SELECT * FROM HillfortModel where id = :id")
+    fun sortByTownland(id: String): List<HillfortModel>
 
 //    @Query("SELECT * FROM HillfortModel WHERE townland = 'town'")
 //    fun findTown(town: String): List<HillfortModel>
 
-    @Query("select * from HillfortModel where id = :arg0")
+    @Query("select * from HillfortModel where id = :id")
     fun findById(id: Long): HillfortModel
 
     @Update

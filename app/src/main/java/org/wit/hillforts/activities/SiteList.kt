@@ -100,7 +100,7 @@ class SiteList : AppCompatActivity(), HillfortListener {
                 //showMessage("display the game score or anything!")
                 dialog.dismiss()
                 val searchText = searchBox!!.text.toString()
-                loadHillfortsByTown(searchText)
+//                loadHillfortsByTown(searchText)
             }
 
             setNegativeButton("Cancel") {
@@ -129,12 +129,12 @@ class SiteList : AppCompatActivity(), HillfortListener {
     }
 
     //Load Search Results - Not Currently implemented
-    private fun loadHillfortsByTown(town: String) {
-        toast("Searched for "+ town)
-        async(UI) {
-            showHillforts(app.hillforts.sortByTownland(town))
-        }
-    }
+//    private fun loadHillfortsByTown(town: String) {
+//        toast("Searched for "+ town)
+//        async(UI) {
+//            showHillforts(app.hillforts.sortByTownland(town))
+//        }
+//    }
 
     //Update List
     fun showHillforts (hillforts: List<HillfortModel>) {

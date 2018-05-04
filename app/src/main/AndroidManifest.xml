@@ -17,15 +17,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.Hillfort" />
-        <activity android:name=".activities.SiteList">
+        <activity android:name=".activities.SplashScreen" />
+        <activity android:name=".activities.SiteList"/>
+
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.SiteMapActivity"
             android:label="@string/title_activity_maps"
@@ -46,9 +48,6 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="org.wit.hillforts.activities.Hillfort" />
 
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity
             android:name=".activities.NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"

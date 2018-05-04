@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Yore Explore</string>
 
+    <!--LOGIN-->
+    <string name="sign_in">Log In</string>
+    <string name="sign_up">Register</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+
     <!--Menu Strings-->
     <string name="menu_addSite">Add</string>
     <string name="menu_cancelSite">Cancel</string>
@@ -68,6 +74,8 @@
         <item>0</item>
         <item>-1</item>
     </string-array>
+
+
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>

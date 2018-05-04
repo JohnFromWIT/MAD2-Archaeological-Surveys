@@ -1,3 +1,5 @@
 <resources>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA8K1Qrnqyrzhwtyp19Ww4LVWrVJGF92bI</string>
+    <string name="default_web_client_id">1071663120091-g3419tc7ocbvfsqtjfjfpt89t69vd18q.apps.googleusercontent.com</string>
+
 </resources>

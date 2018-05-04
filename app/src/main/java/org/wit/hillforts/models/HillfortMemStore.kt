@@ -44,6 +44,10 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
         hillforts.remove(hillfort)
     }
 
+    override fun clear() {
+        hillforts.clear()
+    }
+
     //Log All
     internal fun logAll() {
         hillforts.forEach { info("${it}") }
@@ -55,9 +59,9 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
 //    }
 
     //Sort Method - Not Currently Implemented
-    suspend override fun sortByTownland(town: String): List<HillfortModel>{
-       return hillforts
-    }
+//    suspend override fun sortByTownland(town: String): List<HillfortModel>{
+//       return hillforts
+//    }
 
     suspend override fun findById(id:Long) : HillfortModel? {
         val foundHillfort: HillfortModel? = hillforts.find { p -> p.id == id }

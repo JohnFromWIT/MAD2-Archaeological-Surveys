@@ -1,79 +1,80 @@
 package org.wit.hillforts.activities
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import android.widget.TextView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.wit.hillforts.R
+import org.wit.hillforts.firebase.HillfortFireStore
+import org.wit.hillforts.main.MainApp
 
+class LoginActivity : AppCompatActivity(), AnkoLogger {
 
-class LoginActivity : AppCompatActivity() {
-
-    lateinit var gso: GoogleSignInOptions
-    lateinit var mGoogleSignInClient: GoogleSignInClient
-    val RC_SIGN_IN: Int = 1
-    lateinit var signOut: Button
+    lateinit var auth: FirebaseAuth
+    var fireStore: HillfortFireStore? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val signIn = findViewById<View>(R.id.btnLogin) as SignInButton
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-        signOut = findViewById<View>(R.id.btnLogout) as Button
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        signIn.setOnClickListener {
-            view: View? -> signIn()
-        }
-    }
-    private fun signIn () {
-        val signInIntent: Intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
+        progressBar.visibility = View.GONE
+        auth = FirebaseAuth.getInstance()
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleResult (task)
-        }else {
-            Toast.makeText(this, "Problem in execution order :(", Toast.LENGTH_LONG).show()
+        var app = application as MainApp
+        if (app.hillforts is HillfortFireStore) {
+            fireStore = app.hillforts as HillfortFireStore
         }
-    }
-    private fun handleResult (completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            updateUI (account)
-        } catch (e: ApiException) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+
+        signUpBtn.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            val email = field_email.text.toString()
+            val password = field_password.text.toString()
+            if (email == "" || password == "") {
+                toast("Please provide email + password")
+            }
+            else {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+                    progressBar.visibility = View.GONE
+                    if (task.isSuccessful) {
+                        info("Login success")
+                        startActivity(intentFor<SiteList>())
+                    }
+                    else {
+                        toast("Sign Up Failed: ${task.exception?.message}")
+                    }
+                }
+            }
         }
-    }
-    private fun updateUI (account: GoogleSignInAccount) {
-        val dispTxt = findViewById<View>(R.id.displayText) as TextView
-        dispTxt.text = account.displayName
-        signOut.visibility = View.VISIBLE
-        signOut.setOnClickListener {
-            view: View? ->  mGoogleSignInClient.signOut().addOnCompleteListener {
-            task: Task<Void> -> if (task.isSuccessful) {
-            dispTxt.text = " "
-            signOut.visibility = View.INVISIBLE
-            signOut.isClickable = false
-            finish()
-        }
-        }
+
+        signInBtn.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            val email = field_email.text.toString()
+            val password = field_password.text.toString()
+            if (email == "" || password == "") {
+                toast("Please provide email + password")
+            }
+            else {
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+                    progressBar.visibility = View.GONE
+                    if (task.isSuccessful) {
+                        if (fireStore != null) {
+                            fireStore!!.fetchHillforts {
+                                startActivity(intentFor<SiteList>())
+                            }
+                        }
+                        else {
+                            startActivity(intentFor<SiteList>())
+                        }
+                    }
+                    else {
+                        toast("Sign In Failed")
+                    }
+                }
+            }
         }
     }
 }
